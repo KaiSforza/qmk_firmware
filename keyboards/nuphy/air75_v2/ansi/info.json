@@ -33,7 +33,11 @@
     },
     "qmk": {
         "tap_keycode_delay": 8
-      },
+    },
+    "matrix_size": {
+        "cols": 17,
+        "rows": 6
+    },
     "rgb_matrix": {
       "driver": "ws2812",
       "center_point": [80, 30],
