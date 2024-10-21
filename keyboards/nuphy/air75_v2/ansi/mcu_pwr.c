@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "user_kb.h"
 #include "mcu_stm32f0xx.h"
 #include "mcu_pwr.h"
+#include "gpio.h"
 
 static const pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
 static const pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
@@ -110,12 +111,12 @@ void enter_deep_sleep(void) {
 
     //------------------------ Configure key to wake up
     for (int i = 0; i < ARRAY_SIZE(col_pins); i++) {
-        gpio_set_pin_output(col_pins[i]);
-        gpio_write_pin_high(col_pins[i]);
+        setPinOutput(col_pins[i]);
+        writePinHigh(col_pins[i]);
     }
 
     for (int i = 0; i < ARRAY_SIZE(row_pins); i++) {
-        gpio_set_pin_input_low(row_pins[i]);
+        setPinInputLow(row_pins[i]);
     }
 
     SYSCFG_EXTILineConfig(EXTI_PORT_R0, EXTI_PIN_R0);
@@ -146,22 +147,22 @@ void enter_deep_sleep(void) {
     // power off leds
     led_pwr_sleep_handle();
 
-    gpio_set_pin_output(DEV_MODE_PIN);
-    gpio_write_pin_low(DEV_MODE_PIN);
+    setPinOutput(DEV_MODE_PIN);
+    writePinLow(DEV_MODE_PIN);
 
-    gpio_set_pin_output(SYS_MODE_PIN);
-    gpio_write_pin_low(SYS_MODE_PIN);
+    setPinOutput(SYS_MODE_PIN);
+    writePinLow(SYS_MODE_PIN);
 
-    gpio_set_pin_output(A7);
-    gpio_write_pin_low(A7);
-    gpio_set_pin_output(DRIVER_SIDE_PIN);
-    gpio_write_pin_low(DRIVER_SIDE_PIN);
+    setPinOutput(A7);
+    writePinLow(A7);
+    setPinOutput(DRIVER_SIDE_PIN);
+    writePinLow(DRIVER_SIDE_PIN);
 
-    gpio_set_pin_output(NRF_TEST_PIN);
-    gpio_write_pin_high(NRF_TEST_PIN);
+    setPinOutput(NRF_TEST_PIN);
+    writePinHigh(NRF_TEST_PIN);
 
-    gpio_set_pin_output(NRF_WAKEUP_PIN);
-    gpio_write_pin_high(NRF_WAKEUP_PIN);
+    setPinOutput(NRF_WAKEUP_PIN);
+    writePinHigh(NRF_WAKEUP_PIN);
 
     // Enter low power mode and wait for interrupt signal
     PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);
@@ -173,10 +174,10 @@ void exit_deep_sleep(void) {
     matrix_init_pins();
 
     // Restore IO working status
-    gpio_set_pin_input_high(DEV_MODE_PIN); // PC0
-    gpio_set_pin_input_high(SYS_MODE_PIN); // PC1
+    setPinInputHigh(DEV_MODE_PIN); // PC0
+    setPinInputHigh(SYS_MODE_PIN); // PC1
 
-    gpio_set_pin_output(NRF_WAKEUP_PIN);
+    setPinOutput(NRF_WAKEUP_PIN);
 
     // Power on LEDs
     led_pwr_wake_handle();
@@ -253,32 +254,32 @@ void led_pwr_wake_handle(void) {
 void pwr_rgb_led_off(void) {
     if (!rgb_led_on) return;
     // LED power supply off
-    gpio_set_pin_output(DC_BOOST_PIN);
-    gpio_write_pin_low(DC_BOOST_PIN);
-    gpio_set_pin_input(DRIVER_LED_CS_PIN);
+    setPinOutput(DC_BOOST_PIN);
+    writePinLow(DC_BOOST_PIN);
+    setPinInput(DRIVER_LED_CS_PIN);
     rgb_led_on = 0;
 }
 
 void pwr_rgb_led_on(void) {
     if (rgb_led_on) return;
     // LED power supply on
-    gpio_set_pin_output(DC_BOOST_PIN);
-    gpio_write_pin_high(DC_BOOST_PIN);
-    gpio_set_pin_output(DRIVER_LED_CS_PIN);
-    gpio_write_pin_low(DRIVER_LED_CS_PIN);
+    setPinOutput(DC_BOOST_PIN);
+    writePinHigh(DC_BOOST_PIN);
+    setPinOutput(DRIVER_LED_CS_PIN);
+    writePinLow(DRIVER_LED_CS_PIN);
     rgb_led_on = 1;
 }
 
 void pwr_side_led_off(void) {
     if (!side_led_on) return;
-    gpio_set_pin_input(DRIVER_SIDE_CS_PIN);
+    setPinInput(DRIVER_SIDE_CS_PIN);
     side_led_on = 0;
 }
 
 void pwr_side_led_on(void) {
     if (side_led_on) return;
-    gpio_set_pin_output(DRIVER_SIDE_CS_PIN);
-    gpio_write_pin_low(DRIVER_SIDE_CS_PIN);
+    setPinOutput(DRIVER_SIDE_CS_PIN);
+    writePinLow(DRIVER_SIDE_CS_PIN);
     side_led_on = 1;
 }
 

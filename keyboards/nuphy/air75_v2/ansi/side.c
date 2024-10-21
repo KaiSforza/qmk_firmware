@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "ws2812.h"
 #include "mcu_pwr.h"
 #include "side.h"
+#include "gpio.h"
 
 /* side rgb mode */
 enum {
@@ -658,9 +659,9 @@ void bat_led_show(void) {
  * @brief  device_reset_show.
  */
 void device_reset_show(void) {
-    gpio_write_pin_high(DC_BOOST_PIN);
-    gpio_set_pin_output(DRIVER_LED_CS_PIN);
-    gpio_write_pin_low(DRIVER_LED_CS_PIN);
+    writePinHigh(DC_BOOST_PIN);
+    setPinOutput(DRIVER_LED_CS_PIN);
+    writePinLow(DRIVER_LED_CS_PIN);
     pwr_side_led_on();
 
     for (int blink_cnt = 0; blink_cnt < 3; blink_cnt++) {
@@ -697,9 +698,9 @@ void device_reset_init(void) {
  */
 void rgb_test_show(void) {
     // open power control
-    gpio_write_pin_high(DC_BOOST_PIN);
-    gpio_set_pin_output(DRIVER_LED_CS_PIN);
-    gpio_write_pin_low(DRIVER_LED_CS_PIN);
+    writePinHigh(DC_BOOST_PIN);
+    setPinOutput(DRIVER_LED_CS_PIN);
+    writePinLow(DRIVER_LED_CS_PIN);
     pwr_side_led_on();
 
     // set test color

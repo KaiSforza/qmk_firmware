@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 #include "ws2812.h"
+#include "gpio.h"
 
 /* Adapted from https://github.com/bigjosh/SimpleNeoPixelDemo/ */
 
@@ -71,15 +72,15 @@ void side_sendByte(uint8_t byte) {
         // using something like wait_ns(is_one ? T1L : T0L) here throws off timings
         if (is_one) {
             // 1
-            gpio_write_pin_high(DRIVER_SIDE_PIN);
+            writePinHigh(DRIVER_SIDE_PIN);
             wait_ns(WS2812_T1H);
-            gpio_write_pin_low(DRIVER_SIDE_PIN);
+            writePinLow(DRIVER_SIDE_PIN);
             wait_ns(WS2812_T1L);
         } else {
             // 0
-            gpio_write_pin_high(DRIVER_SIDE_PIN);
+            writePinHigh(DRIVER_SIDE_PIN);
             wait_ns(WS2812_T0H);
-            gpio_write_pin_low(DRIVER_SIDE_PIN);
+            writePinLow(DRIVER_SIDE_PIN);
             wait_ns(WS2812_T0L);
         }
     }
