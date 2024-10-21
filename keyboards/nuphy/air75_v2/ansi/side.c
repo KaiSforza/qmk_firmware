@@ -297,19 +297,12 @@ void sleep_sw_led_show(void) {
  * @brief  sys_led_show.
  */
 void sys_led_show(void) {
-    //if (dev_info.link_mode == LINK_USB) {
-        if (host_keyboard_led_state().caps_lock) {
-            side_rgb_set_color(4, 0x00, 0x80, 0x00);
-        }
-    //}
-    //else {
-    //    if (dev_info.rf_led & 0x02) {
-    //        side_rgb_set_color(5, 0x00, 0x80, 0x00);
-    //    }
-    //}
+    if (host_keyboard_led_state().caps_lock) {
+        side_rgb_set_color(4, 0x00, 0x80, 0x00);
+    }
     uint8_t layer = get_highest_layer(layer_state);
 
-    if (layer == 3) {
+    if (layer == 3 || layer == 1) {
         side_rgb_set_color(0, 0x80, 0x80, 0x00);
     }
     else if (layer == 4) {

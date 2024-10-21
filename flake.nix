@@ -31,6 +31,7 @@
                 ];
                 packages = [
                     pkgs.qmk
+                    pkgs.pkgsCross.avr.libcCross
                 ];
             };
         };

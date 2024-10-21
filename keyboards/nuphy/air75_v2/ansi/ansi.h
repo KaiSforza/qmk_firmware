@@ -27,9 +27,6 @@ enum custom_keycodes {
     LNK_BLE2,
     LNK_BLE3,
 
-    MAC_VOICE,
-    MAC_DND,
-
     SIDE_VAI,
     SIDE_VAD,
     SIDE_MOD,
@@ -45,7 +42,4 @@ enum custom_keycodes {
 };
 
 #define SYS_PRT                 G(S(KC_3))
-#define MAC_PRTA                G(S(KC_4))
 #define WIN_PRTA                G(S(KC_S))
-#define MAC_SEARCH              G(KC_SPC)
-#define MAC_LOCK                G(C(KC_Q))

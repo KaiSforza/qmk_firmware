@@ -1,7 +1,7 @@
 {
     "name": "NuPhy Air75 V2 - kaictl",
-    "vendorId": "0x19F5",
-    "productId": "0x3246",
+    "vendorId": "0x19F6",
+    "productId": "0x3247",
     "matrix": {
       "rows": 6,
       "cols": 17

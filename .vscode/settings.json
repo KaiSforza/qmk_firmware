@@ -30,5 +30,8 @@
     },
     "clangd.arguments": [
         "--header-insertion=never"
-    ]
+    ],
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.default.compilerPath": "/home/creyo/.nix-profile/bin/clang",
+    "cmake.ignoreCMakeListsMissing": true
 }
