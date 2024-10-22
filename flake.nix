@@ -17,7 +17,15 @@
         inputs.devshell.flakeModule
       ];
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
+      perSystem = { config, self', inputs', pkgs, system, ... }:
+        let
+          qmk = (pkgs.qmk.overrideAttrs (n: p: {
+            propagatedBuildInputs = p.propagatedBuildInputs ++ [
+              pkgs.python312.pkgs.rich
+            ];
+          }));
+        in
+      {
         # Per-system attributes can be defined here. The self' and inputs'
         # module parameters provide easy access to attributes of the same
         # system.
@@ -30,8 +38,24 @@
                     {name = "QMK_HOME"; value = "/home/creyo/git/qmk_firmware"; }
                 ];
                 packages = [
-                    pkgs.qmk
+                    qmk
                     pkgs.pkgsCross.avr.libcCross
+                    (pkgs.python312.withPackages (p: [
+                        p.appdirs
+                        p.argcomplete
+                        p.colorama
+                        p.dotty-dict
+                        p.hid
+                        p.hjson
+                        p.jsonschema
+                        p.milc
+                        p.pygments
+                        p.pyserial
+                        p.pyusb
+                        p.pillow
+
+                        p.rich
+                    ]))
                 ];
             };
         };

@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,    KC_BRID,    KC_BRIU,    G(KC_TAB), KC_FIND,    LAG(KC_K),  _______,   KC_MPRV,    KC_MPLY,     KC_MNXT,   KC_MUTE,    KC_VOLD,     KC_VOLU,    KC_NUM,     _______,    _______,
     _______,    LNK_BLE1,   LNK_BLE2,   LNK_BLE3,  LNK_RF,     _______,    _______,   KC_P7,      KC_P8,       KC_P9,     KC_P0,      KC_PMNS,    KC_PPLS,                 _______,    _______,
     _______,    RGB_SPD,    RGB_VAI,    RGB_SPI,   _______,    _______,    _______,   KC_P4,      KC_P5,       KC_P6,     KC_PSLS,    KC_PAST,    _______,                 BAT_SHOW,   _______,
-    KC_CAPS,    RGB_MOD,    RGB_VAD,    RGB_HUI,   _______,    _______,    _______,   KC_P1,      KC_P2,       KC_P2,     _______,    _______,                             KC_PENT,    KC_VOLU,
+    KC_CAPS,    RGB_MOD,    RGB_VAD,    RGB_HUI,   _______,    _______,    _______,   KC_P1,      KC_P2,       KC_P3,     _______,    _______,                             KC_PENT,    KC_VOLU,
     TT(WIN_FN2),_______,    _______,    RGB_TEST,  _______,    BAT_NUM,    _______,   KC_P0,      KC_PCMM,     KC_PDOT,   KC_RGUI,                 _______,    _______,    KC_VOLD,
     _______,    KC_APP,     _______,                                       _______,                            TT(WIN_FN2),TT(WIN_FN),_______,                 _______,    _______,    _______),
 

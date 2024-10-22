@@ -1,5 +1,4 @@
 {
-    "$schema": "../../../../data/schemas/keyboard.jsonschema",
     "keyboard_name": "NuPhy Air75 V2 - Kai",
     "usb":{
         "pid": "0x3247",
